@@ -8,6 +8,8 @@ import 'package:quittr/core/presentation/theme/theme.dart';
 import 'package:quittr/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:quittr/features/auth/presentation/screens/auth_wrapper.dart';
 import 'package:quittr/features/auth/presentation/screens/forgot_password_screen.dart';
+import 'package:quittr/features/breathing_exercise/presentation/bloc/breathing_bloc.dart';
+import 'package:quittr/features/breathing_exercise/presentation/screens/breathing_excercise_page.dart';
 import 'package:quittr/features/home/presentation/screens/home_screen.dart';
 import 'package:quittr/features/meditate/presentation/bloc/quotes_bloc.dart';
 import 'package:quittr/features/meditate/presentation/screens/meditate_screen.dart'
@@ -17,6 +19,7 @@ import 'package:quittr/features/profile/presentation/screens/edit_profile_screen
 import 'package:quittr/features/reason/presentation/screens/reason_list_screen.dart';
 import 'package:quittr/features/relapse_tracker/presentation/bloc/relapse_tracker_bloc.dart';
 import 'package:quittr/features/settings/presentation/screens/settings_screen.dart';
+import 'package:quittr/features/side%20effects/presentaion/screens/side_effects_screen.dart';
 import 'package:quittr/firebase_options.dart';
 import 'package:quittr/core/presentation/theme/cubit/theme_cubit.dart';
 import 'package:quittr/features/auth/presentation/screens/auth_screen.dart';
@@ -54,7 +57,8 @@ class QuittrApp extends StatelessWidget {
             ..add(const InitializePaywall())
             ..add(const VerifySubscriptionEvent()),
         ),
-        BlocProvider(create: (_) => RelapseTrackerBloc())
+        BlocProvider(create: (_) => RelapseTrackerBloc()),
+        BlocProvider(create: (_) => BreathingBloc()),
       ],
       child: BlocBuilder<ThemeCubit, bool>(
         builder: (context, isDarkMode) {
@@ -76,7 +80,11 @@ class QuittrApp extends StatelessWidget {
               '/recovery-journal': (context) => const JournalScreen(),
               '/reason-list': (context) => const ReasonListScreen(),
               '/meditate-screen': (context) => const meditate.MeditateScreen(),
-              '/motivation-screen': (context) => const MotivationScreen()
+              '/motivation-screen': (context) => const MotivationScreen(),
+              '/breathing-exercise-screen': (context) =>
+                  const BreathingExcercisePage(),
+
+                  '/side-effects-screen' : (context) => const SideEffectsScreen(),
             },
           );
         },

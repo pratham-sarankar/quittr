@@ -92,14 +92,7 @@ class RelapseTrackerScreen extends StatelessWidget {
                       context
                           .read<RelapseTrackerBloc>()
                           .add(RelapseTrackerBottomSheetOpenEvent());
-                      BottomModelSheet()
-                          .showCompletionBottomSheet(context)
-                          .then((_) {
-                        // Reset state when sheet closes
-                        context
-                            .read<RelapseTrackerBloc>()
-                            .add(RelapseTrackerBottomSheetOpenEvent());
-                      });
+                      BottomModelSheet().showCompletionBottomSheet(context);
                     },
                   ),
                   RelapseActionButton(
@@ -160,7 +153,9 @@ class RelapseTrackerScreen extends StatelessWidget {
                         icon: Icons.monitor_heart,
                         iconColor: Colors.blue.shade900,
                         title: 'Side Effects',
-                        onTap: () async {},
+                        onTap: () async {
+                          Navigator.pushNamed(context, '/side-effects-screen');
+                        },
                       ),
                       Divider(
                         height: 1,
@@ -187,7 +182,7 @@ class RelapseTrackerScreen extends StatelessWidget {
                         title: 'Breathe Exercise',
                         onTap: () => Navigator.pushNamed(
                           context,
-                          '/recovery-journal',
+                          '/breathing-exercise-screen',
                         ),
                       ),
                       Divider(

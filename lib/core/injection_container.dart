@@ -16,6 +16,10 @@ import 'package:quittr/features/motivaton/domain/usecases/get_motivationalQuotes
 import 'package:quittr/features/paywall/data/datasources/purchase_data_source.dart';
 import 'package:quittr/features/paywall/domain/usecases/verify_subscription.dart';
 import 'package:quittr/features/paywall/presentation/bloc/paywall_bloc.dart';
+import 'package:quittr/features/side%20effects/data/data_sources/side_effects_local_datasource.dart';
+import 'package:quittr/features/side%20effects/data/repository/side_effects_repository_impl.dart';
+import 'package:quittr/features/side%20effects/domian/repository/side_effectes_repository.dart';
+import 'package:quittr/features/side%20effects/domian/usecases/get_side_effects.dart';
 import '../features/auth/data/repositories/auth_repository_impl.dart';
 import '../features/auth/domain/repositories/auth_repository.dart';
 import '../features/profile/data/repositories/profile_repository_impl.dart';
@@ -116,8 +120,6 @@ Future<void> init() async {
 
   sl.registerFactory(() => GetQuotes(sl()));
 
- 
-
   // Paywall
   sl.registerLazySingleton(
     () => PaywallBloc(
@@ -150,4 +152,12 @@ Future<void> init() async {
   sl.registerFactory<MotivationQuotesRepository>(
       () => MotivationalQuotesRepositoryImpl(sl()));
   sl.registerFactory(() => GetMotivationalquotes(sl()));
+
+  // Features :- Side Effects
+
+  sl.registerFactory<SideEffectsLocalDatasource>(
+      () => SideEffectsLocalDatasourceImpl());
+  sl.registerFactory<SideEffectesRepository>(
+      () => SideEffectsRepositoryImpl(sl()));
+  sl.registerFactory(() => GetSideEffects(sl()));
 }
